@@ -1,0 +1,23 @@
+Sample Data:
+{
+"gameId": "G78901",
+"date": "2025-03-18",
+"team_stats": {
+"team": "Lakers",
+"total_points": 120,
+"total_assists": 30,
+"total_rebounds": 55,
+"total_steals": 8,
+"total_blocks": 7,
+"total_turnovers": 9,
+"total_fouls": 17
+},
+"players": [
+{"player": "LeBron James", "points": 32, "assists": 8, "rebounds": 10, "steals": 2, "blocks": 2, "fouls": 2, "turnovers": 2},
+{"player": "Anthony Davis", "points": 25, "assists": 4, "rebounds": 12, "steals": 1, "blocks": 4, "fouls": 3, "turnovers": 1},
+{"player": "D'Angelo Russell", "points": 18, "assists": 9, "rebounds": 4, "steals": 2, "blocks": 1, "fouls": 2, "turnovers": 2},
+{"player": "Austin Reaves", "points": 16, "assists": 6, "rebounds": 5, "steals": 3, "blocks": 0, "fouls": 3, "turnovers": 2}
+],
+"quarter": 4,
+"time": "00:00"
+}
