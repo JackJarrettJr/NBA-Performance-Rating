@@ -1,51 +1,3 @@
-# Databricks notebook source
-# MAGIC %md
-# MAGIC # NBA Best Performance using Real-time Data Processing with Azure Databricks (and Event Hubs)
-# MAGIC
-# MAGIC This notebook demonstrates a real-time data processing workflow in Databricks using Structured Streaming to ingest data from Event Hubs. Designed a Bronze-Silver-Gold architecture to refine and transform data to find the best performance from a basketball game, with an automated email alert to notify stakeholders of the top results.
-# MAGIC
-# MAGIC - Data Sources: Streaming data from IoT devices or social media feeds. (Simulated in Event Hubs)
-# MAGIC - Ingestion: Azure Event Hubs for capturing real-time data.
-# MAGIC - Processing: Azure Databricks for stream processing using Structured Streaming.
-# MAGIC - Storage: Processed data stored Azure Data Lake (Delta Format).
-# MAGIC
-# MAGIC ### Azure Services Required
-# MAGIC - Databricks Workspace
-# MAGIC - Azure Data Lake Storage
-# MAGIC - Azure Event Hub
-# MAGIC
-# MAGIC ### Azure Databricks Configuration Required
-# MAGIC - Single Node Compute Cluster: `12.2 LTS (includes Apache Spark 3.3.2, Scala 2.12)`
-# MAGIC - Maven Library installed on Compute Cluster: `com.microsoft.azure:azure-eventhubs-spark_2.12:2.3.22`
-
-# COMMAND ----------
-
-# MAGIC %md
-# MAGIC ## Sample Data:
-# MAGIC ### {
-# MAGIC ###     "gameId": "G78901",
-# MAGIC ###     "date": "2025-03-18",
-# MAGIC ###     "team_stats": {
-# MAGIC ###         "team": "Lakers",
-# MAGIC ###         "total_points": 120,
-# MAGIC ###         "total_assists": 30,
-# MAGIC ###         "total_rebounds": 55,
-# MAGIC ###         "total_steals": 8,
-# MAGIC ###         "total_blocks": 7,
-# MAGIC ###         "total_turnovers": 9,
-# MAGIC ###         "total_fouls": 17
-# MAGIC ###     },
-# MAGIC ###     "players": [
-# MAGIC ###         {"player": "LeBron James", "points": 32, "assists": 8, "rebounds": 10, "steals": 2, "blocks": 2, "fouls": 2, "turnovers": 2},
-# MAGIC ###         {"player": "Anthony Davis", "points": 25, "assists": 4, "rebounds": 12, "steals": 1, "blocks": 4, "fouls": 3, "turnovers": 1},
-# MAGIC ###         {"player": "D'Angelo Russell", "points": 18, "assists": 9, "rebounds": 4, "steals": 2, "blocks": 1, "fouls": 2, "turnovers": 2},
-# MAGIC ###         {"player": "Austin Reaves", "points": 16, "assists": 6, "rebounds": 5, "steals": 3, "blocks": 0, "fouls": 3, "turnovers": 2}
-# MAGIC ###     ],
-# MAGIC ###     "quarter": 4,
-# MAGIC ###     "time": "00:00"
-# MAGIC ### }
-# MAGIC
-
 # COMMAND ----------
 
 # MAGIC %md
@@ -169,9 +121,8 @@ df_bronze.display()
 
 # COMMAND ----------
 
-# MAGIC %sql 
-# MAGIC
-# MAGIC select * from hive_metastore.bronze.nba
+ %sql 
+ select * from hive_metastore.bronze.nba
 # MAGIC
 
 # COMMAND ----------
@@ -224,10 +175,9 @@ df_silver_flat.display()
 
 # COMMAND ----------
 
-# MAGIC %sql 
-# MAGIC
-# MAGIC select * from hive_metastore.silver.nba
-# MAGIC
+%sql 
+select * from hive_metastore.silver.nba
+
 
 # COMMAND ----------
 
@@ -351,8 +301,8 @@ df_gold.display()
 
 # COMMAND ----------
 
-# MAGIC %sql
-# MAGIC #Player Performance
-# MAGIC select * from hive_metastore.gold.nba_top_performer
-# MAGIC #Team Performance
-# MAGIC select * from hive_metastore.gold.nba_best_team
+ %sql
+ #Player Performance
+ select * from hive_metastore.gold.nba_top_performer
+ #Team Performance
+ select * from hive_metastore.gold.nba_best_team
